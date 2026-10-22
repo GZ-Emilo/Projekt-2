@@ -33,16 +33,27 @@ class Spil
     public void nytSpil()
     {
         int i = 0;
+        int f = 0;
         int hop = 0;
         int gammely = figur.y;
         int hopHøjde = 0;
+        int tæller = 0;
         figur.opretFigur();
         forhindringer.opretForhindring();
         opretBane();
         while (true)
         {
+            Random rand = new Random();
+            if (tæller == 0)
+            {
+                f = rand.Next(0, forhindringer.ForhindringsList.Count);
+                Console.SetCursorPosition(forhindringer.ForhindringsList[f].x, forhindringer.ForhindringsList[f].y);
+                Console.WriteLine(forhindringer.ForhindringsList[f].krop);
+                tæller++;
+            }
 
-            //Får figuren til at hoppe på i koden
+            //opretTimer();
+
             if (Console.KeyAvailable)
             {
                 ConsoleKey key = Console.ReadKey(true).Key;
@@ -51,17 +62,14 @@ class Spil
                     hop = 9;
                 }
             }
-
-            //Kontrollere hvor figuren tegnes, baseret på hop integeren.
             if (hop > 0)
             {
-                //figur slettes
                 Console.SetCursorPosition(figur.x, gammely + 1);
                 Console.Write("   ");
                 Console.SetCursorPosition(figur.x, gammely + 2);
                 Console.Write("   ");
 
-                //tegnes i hop
+
                 hop--;
                 hopHøjde = 2;
                 Console.SetCursorPosition(figur.x, figur.y - 2);
@@ -70,10 +78,10 @@ class Spil
                 Console.Write("/|\\");
                 Console.SetCursorPosition(figur.x, figur.y);
                 Console.Write("/ \\");
+
             }
             else
             {
-                //tegnes på jorden
                 hopHøjde = 0;
                 Console.SetCursorPosition(figur.x, figur.y - 2);
                 Console.Write("   ");
@@ -84,46 +92,44 @@ class Spil
                 figur.opretFigur();
             }
 
-            //forhindringer slettes og tegnes efter at have ramt kanten af CMD
+            //forhindringer kommer tilbage efter at have ramt kanten af CMD
             if (forhindringer.ForhindringsList[0].x >= Console.WindowWidth - 6)
             {
-                //Denne kode viser hvad der sker med hunden der går til højre
                 Console.SetCursorPosition(forhindringer.ForhindringsList[0].x, forhindringer.ForhindringsList[0].y);
                 Console.Write("      ");
                 forhindringer.ForhindringsList[0].x = 0;
-                Console.SetCursorPosition(forhindringer.ForhindringsList[0].x, forhindringer.ForhindringsList[0].y);
-                Console.Write(forhindringer.ForhindringsList[0].krop);
+                tæller--;
+                //Console.SetCursorPosition(forhindringer.ForhindringsList[0].x, forhindringer.ForhindringsList[0].y);
+                //Console.Write(forhindringer.ForhindringsList[0].krop);
             }
 
             if (forhindringer.ForhindringsList[1].x < 3)
             {
-                //Denne kode viser hvad der sker med hunden der går til venstre
                 Console.SetCursorPosition(forhindringer.ForhindringsList[1].x, forhindringer.ForhindringsList[1].y);
                 Console.Write("      ");
                 forhindringer.ForhindringsList[1].x = 110;
-                Console.SetCursorPosition(forhindringer.ForhindringsList[1].x, forhindringer.ForhindringsList[1].y);
-                Console.Write(forhindringer.ForhindringsList[1].krop);
+                tæller--;
+                //Console.SetCursorPosition(forhindringer.ForhindringsList[1].x, forhindringer.ForhindringsList[1].y);
+                //Console.Write(forhindringer.ForhindringsList[1].krop);
             }
 
-            //forhindringer slettes og tegnes for at simulere bevægelse
+            //forhindringer bevæger sig
             if (i == 0)
             {
                 while (i < forhindringer.ForhindringsList.Count)
                 {
-                    if (i == 0)
+                    if (i == 0 && f == 0)
                     {
                         Console.SetCursorPosition(forhindringer.ForhindringsList[i].x, forhindringer.ForhindringsList[i].y);
                         Console.Write("      ");
-                        //Figur bevæger sig mod højre
                         forhindringer.ForhindringsList[i].x++;
                         Console.SetCursorPosition(forhindringer.ForhindringsList[i].x, forhindringer.ForhindringsList[i].y);
                         Console.Write(forhindringer.ForhindringsList[i].krop);
                     }
-                    if (i == 1)
+                    if (i == 1 && f == 1)
                     {
                         Console.SetCursorPosition(forhindringer.ForhindringsList[i].x, forhindringer.ForhindringsList[i].y);
                         Console.Write("      ");
-                        //Figur bevæger sig mod venstre
                         forhindringer.ForhindringsList[i].x--;
                         Console.SetCursorPosition(forhindringer.ForhindringsList[i].x, forhindringer.ForhindringsList[i].y);
                         Console.Write(forhindringer.ForhindringsList[i].krop);
@@ -133,17 +139,55 @@ class Spil
                 i = 0;
             }
 
+            //forhindringer kommer tilbage efter at have ramt kanten af CMD
+            if (forhindringer.ForhindringsList[0].x >= Console.WindowWidth - 6)
+            {
+                Console.SetCursorPosition(forhindringer.ForhindringsList[0].x, forhindringer.ForhindringsList[0].y);
+                Console.Write("      ");
+                forhindringer.ForhindringsList[0].x = 0;
+                tæller--;
+                //Console.SetCursorPosition(forhindringer.ForhindringsList[0].x, forhindringer.ForhindringsList[0].y);
+                //Console.Write(forhindringer.ForhindringsList[0].krop);
+            }
 
+            if (forhindringer.ForhindringsList[1].x < 3)
+            {
+                Console.SetCursorPosition(forhindringer.ForhindringsList[1].x, forhindringer.ForhindringsList[1].y);
+                Console.Write("      ");
+                forhindringer.ForhindringsList[1].x = 110;
+                tæller--;
+                //Console.SetCursorPosition(forhindringer.ForhindringsList[1].x, forhindringer.ForhindringsList[1].y);
+                //Console.Write(forhindringer.ForhindringsList[1].krop);
+            }
 
-            //Gør at programmet starter forfra efter 100 millisekunder.
+            if (figur.x == forhindringer.ForhindringsList[0].x)
+            {
+                if (hopHøjde == 0)
+                {
+                    Console.Clear();
+                    Console.SetCursorPosition(55, 10);
+                    Console.WriteLine("Du tabte!");
+                    break;
+                }
+            }
+            if (figur.x == forhindringer.ForhindringsList[1].x)
+            {
+                if (hopHøjde == 0)
+                {
+                    Console.Clear();
+                    Console.SetCursorPosition(55, 10);
+                    Console.WriteLine("Du tabte!");
+                    break;
+                }
+            }
             Thread.Sleep(100);
-
         }
     }
     public void loadLeaderboard()
     {
 
     }
+
     public void opretBane()
     {
         int i = 0;
@@ -154,7 +198,7 @@ class Spil
             i++;
         }
     }
-    public void opretTimer()
+    public void opretTimer() // Virker ikke lige pt.
     {
         Stopwatch timer = new Stopwatch();
         int tid = 0;
@@ -202,13 +246,6 @@ class Forhindringer
     {
         skabForhindring("hundV", 0, 7, "-|¯¯|ö");
         skabForhindring("hundH", 110, 7, "ö|¯¯|-");
-        int i = 0;
-        while (i < ForhindringsList.Count)
-        {
-            Console.SetCursorPosition(ForhindringsList[i].x, ForhindringsList[i].y);
-            Console.WriteLine(ForhindringsList[i].krop);
-            i++;
-        }
     }
     public void skabForhindring(string navn, int x, int y, string krop)
     {
@@ -219,7 +256,6 @@ class Forhindringer
         forhindring.krop = krop;
         ForhindringsList.Add(forhindring);
     }
-
 }
 
 class Forhindring
@@ -230,7 +266,7 @@ class Forhindring
     public string krop;
 }
 
-class Leaderboard
+class Leaderboard // Kan ikke bruges, da vores timer ikke virker, som er grundsten for vores points/score system
 {
     Leaderboard[] TopTi = new Leaderboard[10];
     TopTi adgang;
@@ -245,7 +281,7 @@ class Leaderboard
     }
 }
 
-class TopTi
+class TopTi // Samme som leaderboard
 {
     public int placering;
     public string navn;
