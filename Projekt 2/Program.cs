@@ -196,3 +196,5 @@ class TopTi
     public string navn;
     public int score;
 }
+
+//test
