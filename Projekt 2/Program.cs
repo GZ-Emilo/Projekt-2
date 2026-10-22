@@ -42,9 +42,7 @@ class Spil
         while (true)
         {
 
-
-            //opretTimer();
-
+            //Får figuren til at hoppe på i koden
             if (Console.KeyAvailable)
             {
                 ConsoleKey key = Console.ReadKey(true).Key;
@@ -53,14 +51,17 @@ class Spil
                     hop = 9;
                 }
             }
+
+            //Kontrollere hvor figuren tegnes, baseret på hop integeren.
             if (hop > 0)
             {
+                //figur slettes
                 Console.SetCursorPosition(figur.x, gammely + 1);
                 Console.Write("   ");
                 Console.SetCursorPosition(figur.x, gammely + 2);
                 Console.Write("   ");
 
-
+                //tegnes i hop
                 hop--;
                 hopHøjde = 2;
                 Console.SetCursorPosition(figur.x, figur.y - 2);
@@ -69,10 +70,10 @@ class Spil
                 Console.Write("/|\\");
                 Console.SetCursorPosition(figur.x, figur.y);
                 Console.Write("/ \\");
-
             }
             else
             {
+                //tegnes på jorden
                 hopHøjde = 0;
                 Console.SetCursorPosition(figur.x, figur.y - 2);
                 Console.Write("   ");
@@ -83,9 +84,10 @@ class Spil
                 figur.opretFigur();
             }
 
-            //forhindringer kommer tilbage efter at have ramt kanten af CMD
+            //forhindringer slettes og tegnes efter at have ramt kanten af CMD
             if (forhindringer.ForhindringsList[0].x >= Console.WindowWidth - 6)
             {
+                //Denne kode viser hvad der sker med hunden der går til højre
                 Console.SetCursorPosition(forhindringer.ForhindringsList[0].x, forhindringer.ForhindringsList[0].y);
                 Console.Write("      ");
                 forhindringer.ForhindringsList[0].x = 0;
@@ -95,6 +97,7 @@ class Spil
 
             if (forhindringer.ForhindringsList[1].x < 3)
             {
+                //Denne kode viser hvad der sker med hunden der går til venstre
                 Console.SetCursorPosition(forhindringer.ForhindringsList[1].x, forhindringer.ForhindringsList[1].y);
                 Console.Write("      ");
                 forhindringer.ForhindringsList[1].x = 110;
@@ -102,7 +105,7 @@ class Spil
                 Console.Write(forhindringer.ForhindringsList[1].krop);
             }
 
-            //forhindringer bevæger sig
+            //forhindringer slettes og tegnes for at simulere bevægelse
             if (i == 0)
             {
                 while (i < forhindringer.ForhindringsList.Count)
@@ -111,6 +114,7 @@ class Spil
                     {
                         Console.SetCursorPosition(forhindringer.ForhindringsList[i].x, forhindringer.ForhindringsList[i].y);
                         Console.Write("      ");
+                        //Figur bevæger sig mod højre
                         forhindringer.ForhindringsList[i].x++;
                         Console.SetCursorPosition(forhindringer.ForhindringsList[i].x, forhindringer.ForhindringsList[i].y);
                         Console.Write(forhindringer.ForhindringsList[i].krop);
@@ -119,6 +123,7 @@ class Spil
                     {
                         Console.SetCursorPosition(forhindringer.ForhindringsList[i].x, forhindringer.ForhindringsList[i].y);
                         Console.Write("      ");
+                        //Figur bevæger sig mod venstre
                         forhindringer.ForhindringsList[i].x--;
                         Console.SetCursorPosition(forhindringer.ForhindringsList[i].x, forhindringer.ForhindringsList[i].y);
                         Console.Write(forhindringer.ForhindringsList[i].krop);
@@ -130,7 +135,7 @@ class Spil
 
 
 
-
+            //Gør at programmet starter forfra efter 100 millisekunder.
             Thread.Sleep(100);
 
         }
