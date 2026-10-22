@@ -32,6 +32,7 @@ class Spil
 
     public void nytSpil()
     {
+        int i = 0;
         int hop = 0;
         int gammely = figur.y;
         int hopHøjde = 0;
@@ -40,6 +41,7 @@ class Spil
         opretBane();
         while (true)
         {
+
 
             //opretTimer();
 
@@ -80,6 +82,54 @@ class Spil
                 Console.Write("   ");
                 figur.opretFigur();
             }
+
+            //forhindringer kommer tilbage efter at have ramt kanten af CMD
+            if (forhindringer.ForhindringsList[0].x >= Console.WindowWidth - 6)
+            {
+                Console.SetCursorPosition(forhindringer.ForhindringsList[0].x, forhindringer.ForhindringsList[0].y);
+                Console.Write("      ");
+                forhindringer.ForhindringsList[0].x = 0;
+                Console.SetCursorPosition(forhindringer.ForhindringsList[0].x, forhindringer.ForhindringsList[0].y);
+                Console.Write(forhindringer.ForhindringsList[0].krop);
+            }
+
+            if (forhindringer.ForhindringsList[1].x < 3)
+            {
+                Console.SetCursorPosition(forhindringer.ForhindringsList[1].x, forhindringer.ForhindringsList[1].y);
+                Console.Write("      ");
+                forhindringer.ForhindringsList[1].x = 110;
+                Console.SetCursorPosition(forhindringer.ForhindringsList[1].x, forhindringer.ForhindringsList[1].y);
+                Console.Write(forhindringer.ForhindringsList[1].krop);
+            }
+
+            //forhindringer bevæger sig
+            if (i == 0)
+            {
+                while (i < forhindringer.ForhindringsList.Count)
+                {
+                    if (i == 0)
+                    {
+                        Console.SetCursorPosition(forhindringer.ForhindringsList[i].x, forhindringer.ForhindringsList[i].y);
+                        Console.Write("      ");
+                        forhindringer.ForhindringsList[i].x++;
+                        Console.SetCursorPosition(forhindringer.ForhindringsList[i].x, forhindringer.ForhindringsList[i].y);
+                        Console.Write(forhindringer.ForhindringsList[i].krop);
+                    }
+                    if (i == 1)
+                    {
+                        Console.SetCursorPosition(forhindringer.ForhindringsList[i].x, forhindringer.ForhindringsList[i].y);
+                        Console.Write("      ");
+                        forhindringer.ForhindringsList[i].x--;
+                        Console.SetCursorPosition(forhindringer.ForhindringsList[i].x, forhindringer.ForhindringsList[i].y);
+                        Console.Write(forhindringer.ForhindringsList[i].krop);
+                    }
+                    i++;
+                }
+                i = 0;
+            }
+
+
+
 
             Thread.Sleep(100);
 
