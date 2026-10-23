@@ -57,7 +57,7 @@ class Spil
             if (Console.KeyAvailable)
             {
                 ConsoleKey key = Console.ReadKey(true).Key;
-                if (key == ConsoleKey.UpArrow && hop == 0)
+                if (key == ConsoleKey.UpArrow && hopHøjde == 0)
                 {
                     hop = 9;
                 }
@@ -99,8 +99,7 @@ class Spil
                 Console.Write("      ");
                 forhindringer.ForhindringsList[0].x = 0;
                 tæller--;
-                //Console.SetCursorPosition(forhindringer.ForhindringsList[0].x, forhindringer.ForhindringsList[0].y);
-                //Console.Write(forhindringer.ForhindringsList[0].krop);
+
             }
 
             if (forhindringer.ForhindringsList[1].x < 3)
@@ -109,8 +108,7 @@ class Spil
                 Console.Write("      ");
                 forhindringer.ForhindringsList[1].x = 110;
                 tæller--;
-                //Console.SetCursorPosition(forhindringer.ForhindringsList[1].x, forhindringer.ForhindringsList[1].y);
-                //Console.Write(forhindringer.ForhindringsList[1].krop);
+
             }
 
             //forhindringer bevæger sig
@@ -146,8 +144,7 @@ class Spil
                 Console.Write("      ");
                 forhindringer.ForhindringsList[0].x = 0;
                 tæller--;
-                //Console.SetCursorPosition(forhindringer.ForhindringsList[0].x, forhindringer.ForhindringsList[0].y);
-                //Console.Write(forhindringer.ForhindringsList[0].krop);
+
             }
 
             if (forhindringer.ForhindringsList[1].x < 3)
@@ -156,8 +153,7 @@ class Spil
                 Console.Write("      ");
                 forhindringer.ForhindringsList[1].x = 110;
                 tæller--;
-                //Console.SetCursorPosition(forhindringer.ForhindringsList[1].x, forhindringer.ForhindringsList[1].y);
-                //Console.Write(forhindringer.ForhindringsList[1].krop);
+
             }
 
             if (figur.x == forhindringer.ForhindringsList[0].x)
@@ -177,6 +173,13 @@ class Spil
                     Console.Clear();
                     Console.SetCursorPosition(55, 10);
                     Console.WriteLine("Du tabte!");
+                    break;
+                }
+                if (figur.x == forhindringer.ForhindringsList[f].x && hopHøjde == 0)
+                {
+                    Console.Clear();
+                    Console.SetCursorPosition(55, 10);
+                    Console.WriteLine("Du tabte, øv bøv!");
                     break;
                 }
             }
