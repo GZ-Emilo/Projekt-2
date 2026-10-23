@@ -156,33 +156,15 @@ class Spil
 
             }
 
-            if (figur.x == forhindringer.ForhindringsList[0].x)
+
+            if (figur.x == forhindringer.ForhindringsList[f].x && hopHøjde == 0)
             {
-                if (hopHøjde == 0)
-                {
-                    Console.Clear();
-                    Console.SetCursorPosition(55, 10);
-                    Console.WriteLine("Du tabte!");
-                    break;
-                }
+                Console.Clear();
+                Console.SetCursorPosition(55, 10);
+                Console.WriteLine("Du tabte, øv bøv!");
+                break;
             }
-            if (figur.x == forhindringer.ForhindringsList[1].x)
-            {
-                if (hopHøjde == 0)
-                {
-                    Console.Clear();
-                    Console.SetCursorPosition(55, 10);
-                    Console.WriteLine("Du tabte!");
-                    break;
-                }
-                if (figur.x == forhindringer.ForhindringsList[f].x && hopHøjde == 0)
-                {
-                    Console.Clear();
-                    Console.SetCursorPosition(55, 10);
-                    Console.WriteLine("Du tabte, øv bøv!");
-                    break;
-                }
-            }
+
             Thread.Sleep(100);
         }
     }
